@@ -1,0 +1,17 @@
+name: Deploy to Docker Registry
+on:
+  workflow_dispatch:
+    inputs:
+      env:
+        description: 'env, prod, dev or staging'
+        required: true
+        default: 'dev'
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+          ssh-key: '${{ secrets.SSH_PRIVATE_KEY }}'
